@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { HeroStatusContext } from '../../hooks/context/HeroStatus';
 import { HeroObject } from './styles';
-import { HeroPostionType, HeroActionsType } from './types';
 
 const Hero: React.FC = () => {
-  const [position, setPosition] = useState<HeroPostionType>({
-    x: 0,
-    y: 1,
-  });
-  const [direction, setDirection] = useState<'f' | 'b'>('f');
-  const [action, setAction] = useState<HeroActionsType>(undefined);
-
+  const { status, setStatus } = useContext(HeroStatusContext);
   const [pressCount, setPressCount] = useState<number>(0);
 
   useEffect(() => {
@@ -19,24 +13,51 @@ const Hero: React.FC = () => {
         setPressCount(pressCount + 1);
         switch (key) {
           case 'ArrowUp':
-            setPosition((p) => ({ ...p, y: p.y === 17 ? 17 : p.y + 1 }));
+            setStatus((s) => ({
+              ...s,
+              position: {
+                ...s.position,
+                y: s.position.y === 17 ? 17 : s.position.y + 1,
+              },
+            }));
             break;
           case 'ArrowDown':
-            setPosition((p) => ({ ...p, y: p.y === 1 ? 1 : p.y - 1 }));
+            setStatus((s) => ({
+              ...s,
+              position: {
+                ...s.position,
+                y: s.position.y === 1 ? 11 : s.position.y - 1,
+              },
+            }));
             break;
           case 'ArrowLeft':
-            setDirection('b');
-            setPosition((p) => ({ ...p, x: p.x === 0 ? 0 : p.x - 1 }));
+            setStatus((s) => ({ ...s, direction: 'b' }));
+            setStatus((s) => ({
+              ...s,
+              position: {
+                ...s.position,
+                x: s.position.x === 0 ? 0 : s.position.x - 1,
+              },
+            }));
             break;
           case 'ArrowRight':
-            setDirection('f');
-            setPosition((p) => ({ ...p, x: p.x === 19 ? 19 : p.x + 1 }));
+            setStatus((s) => ({ ...s, direction: 'f' }));
+            setStatus((s) => ({
+              ...s,
+              position: {
+                ...s.position,
+                x: s.position.x === 19 ? 19 : s.position.x + 1,
+              },
+            }));
             break;
           case 'q':
             // Não executar o ataque enquanto estiver atacando
-            if (!action) {
-              setAction('attack');
-              setTimeout(() => setAction(undefined), 340);
+            if (!status.action) {
+              setStatus((s) => ({ ...s, action: 'attack' }));
+              setTimeout(
+                () => setStatus((s) => ({ ...s, action: undefined })),
+                340
+              );
             }
         }
       },
@@ -46,10 +67,10 @@ const Hero: React.FC = () => {
 
   return (
     <HeroObject
-      x={position.x}
-      y={position.y}
-      diretion={direction}
-      action={action}
+      x={status.position.x}
+      y={status.position.y}
+      diretion={status.direction}
+      action={status.action}
     />
   );
 };

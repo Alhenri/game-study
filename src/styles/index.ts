@@ -7,9 +7,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
 
     overflow: hidden;
-    font-family: 'Roboto Mono', monospace;
-    font-size: 14px;
-    color: aliceblue;
+    color: white;
+    font-family: '8BITWONDERNominal';
+    font-weight: normal;
+    font-style: normal;
   }
   #root {
     margin: 0;
@@ -49,10 +50,10 @@ export default createGlobalStyle`
 `;
 
 export const GameBoard = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 400px 960px;
+  grid-column-gap: 80px;
   height: 100vh;
   width: 100vw;
-  justify-content: center;
-  align-items: center;
   background-color: black;
 `;

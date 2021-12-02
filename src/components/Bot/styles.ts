@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
 
-import { heroPersonAttack, heroPerson } from '../../assets';
+import { heroPersonAttack, heroPerson, botEnemy } from '../../assets';
 
 const heroAnimation = (bgWidth: number) => keyframes`
   from {
@@ -29,16 +29,17 @@ export const HumanObject = styled.div<HeroObjectInterface>`
   z-index: 1;
   ${({ action, x }) => {
     switch (action) {
-      case 'attack':
-        return css`
-          background-image: url(${heroPersonAttack});
-          width: 96px;
-          left: ${`${x * 48 - 24}px`};
-          animation: ${heroAnimation(384)} 0.3s steps(4) infinite;
-        `;
+      // case 'attack':
+        // return css`
+        //   background-image: url(${botEnemy});
+        //   width: 96px;
+        //   left: ${`${x * 48 - 24}px`};
+        //   animation: ${heroAnimation(384)} 0.3s steps(4) infinite;
+        // `;
+        
       default:
         return css`
-          background-image: url(${heroPerson});
+          background-image: url(${botEnemy});
           width: 48px;
           animation: ${heroAnimation(192)} 0.5s steps(4) infinite;
         `;

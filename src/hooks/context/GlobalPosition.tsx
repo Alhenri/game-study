@@ -69,4 +69,4 @@ const GlobalPositionProvider: React.FC = ({ children }) => {
   );
 };
 
-export default GlobalPositionProvider;
+export { GlobalPositionProvider };
