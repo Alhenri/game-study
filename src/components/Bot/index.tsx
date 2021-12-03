@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { HumanObject } from './styles';
-import { HeroPostionType, HeroActionsType } from './types';
+import { HeroActionsType } from './types';
 import { randomNumber } from '../../utils/randomNumber';
 import { GlobalPositionContext } from '../../hooks/context/GlobalPosition';
 
@@ -49,7 +49,7 @@ const Bot: React.FC<{ id: string }> = ({ id }) => {
         //     setTimeout(() => setAction(undefined), 340);
         //   }
       }
-      setTimeout(() => moveBot(), 5000);
+      setTimeout(() => moveBot(), 500);
     }
     moveBot();
   }, []);

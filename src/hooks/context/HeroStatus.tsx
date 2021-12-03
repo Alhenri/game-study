@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
+import { GameConfigContext } from '../../hooks/context/GameConfigContext';
 import { GlobalPositionContext } from './GlobalPosition';
 
 export type HeroPostionType = {
@@ -36,6 +37,10 @@ const HeroStatusContextProvider: React.FC = ({ children }) => {
     setStatus: setBotStatus,
     canvas: { getCanvasObject },
   } = useContext(GlobalPositionContext);
+
+  const {
+    config: { difficulty },
+  } = useContext(GameConfigContext);
 
   const [pressCount, setPressCount] = useState<number>(0);
   const [status, setStatus] = useState<HeroStatusType>({
@@ -81,14 +86,14 @@ const HeroStatusContextProvider: React.FC = ({ children }) => {
     ): HeroStatusType => {
       switch (getCanvasObject(newPosition)) {
         case 'demon':
-          return { ...s, position: newPosition, life: s.life - 20 };
+          return { ...s, position: newPosition, life: s.life - 12 * difficulty };
         case 'wall':
           return { ...s, position: prevPosition };
         default:
           return { ...s, position: newPosition };
       }
     },
-    [getCanvasObject]
+    [getCanvasObject, difficulty]
   );
 
   useEffect(() => {

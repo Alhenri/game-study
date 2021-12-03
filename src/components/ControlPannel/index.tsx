@@ -10,12 +10,18 @@ import { ControlPannelGrid, LifeBar } from './styles';
 import { HeroStatusContext } from '../../hooks/context/HeroStatus';
 import { GameConfigContext } from '../../hooks/context/GameConfigContext';
 
+const level: any = {
+  1: 'Facil',
+  2: 'Medio',
+  3: 'Dificil',
+};
+
 const ControlPannel: React.FC = () => {
   const {
     status: { life },
   } = useContext(HeroStatusContext);
   const {
-    config: { volume, debugging },
+    config: { volume, debugging, difficulty },
     setConfig,
   } = useContext(GameConfigContext);
 
@@ -24,28 +30,28 @@ const ControlPannel: React.FC = () => {
       case 3:
         return (
           <ImVolumeHigh
-            style={{ fontSize: 30 }}
+            style={{ fontSize: 30, cursor: 'pointer' }}
             onClick={() => setConfig((c) => ({ ...c, volume: 2 }))}
           />
         );
       case 2:
         return (
           <ImVolumeMedium
-            style={{ fontSize: 30 }}
+            style={{ fontSize: 30, cursor: 'pointer' }}
             onClick={() => setConfig((c) => ({ ...c, volume: 1 }))}
           />
         );
       case 1:
         return (
           <ImVolumeLow
-            style={{ fontSize: 30 }}
+            style={{ fontSize: 30, cursor: 'pointer' }}
             onClick={() => setConfig((c) => ({ ...c, volume: 0 }))}
           />
         );
       default:
         return (
           <ImVolumeMute
-            style={{ fontSize: 30 }}
+            style={{ fontSize: 30, cursor: 'pointer' }}
             onClick={() => setConfig((c) => ({ ...c, volume: 3 }))}
           />
         );
@@ -71,8 +77,20 @@ const ControlPannel: React.FC = () => {
             color: debugging ? 'green' : 'white',
             fontSize: 30,
             marginLeft: 15,
+            cursor: 'pointer',
           }}
         />
+        <span
+          onClick={() => {
+            setConfig((s) => ({
+              ...s,
+              difficulty: s.difficulty === 3 ? 1 : s.difficulty + 1,
+            }));
+          }}
+          style={{ fontSize: 30, marginLeft: 15, cursor: 'pointer' }}
+        >
+          {level[difficulty]}
+        </span>
       </div>
     </ControlPannelGrid>
   );

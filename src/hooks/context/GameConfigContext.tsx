@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 export type ConfigType = {
   volume: number;
   debugging: boolean;
+  difficulty: number;
 };
 
 export type GameConfigType = {
@@ -15,6 +16,7 @@ const GameConfigProvider: React.FC = ({ children }) => {
   const [config, setConfig] = useState<ConfigType>({
     volume: 3,
     debugging: false,
+    difficulty: 2,
   });
   return (
     <GameConfigContext.Provider value={{ config, setConfig }}>
