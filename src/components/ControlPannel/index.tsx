@@ -3,15 +3,7 @@ import { ControlPannelGrid, LifeBar } from './styles';
 import { HeroStatusContext } from '../../hooks/context/HeroStatus';
 
 const ControlPannel: React.FC = () => {
-  const { status, setStatus } = useContext(HeroStatusContext);
-
-  // useEffect(() => {
-  //   function simulateLife() {
-  //     setStatus(s => ({...s, life: s.life - 1}))
-  //     setTimeout(simulateLife, 800);
-  //   }
-  //   simulateLife();
-  // }, []);
+  const { status } = useContext(HeroStatusContext);
 
   return (
     <ControlPannelGrid>

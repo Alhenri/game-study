@@ -45,12 +45,12 @@ const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
           });
 
           break;
-        case 4:
-          // Não executar o ataque enquanto estiver atacando
-          if (!action) {
-            setAction('attack');
-            setTimeout(() => setAction(undefined), 340);
-          }
+        // case 4:
+        //   // Não executar o ataque enquanto estiver atacando
+        //   if (!action) {
+        //     setAction('attack');
+        //     setTimeout(() => setAction(undefined), 340);
+        //   }
       }
       setTimeout(() => moveBot(), 500);
     }
