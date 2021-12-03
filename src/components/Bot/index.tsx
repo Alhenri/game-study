@@ -2,12 +2,9 @@ import React, { useEffect, useState, useContext } from 'react';
 import { HumanObject } from './styles';
 import { HeroPostionType, HeroActionsType } from './types';
 import { randomNumber } from '../../utils/randomNumber';
-import {
-  GlobalPositionContext,
-  PositionsKeys,
-} from '../../hooks/context/GlobalPosition';
+import { GlobalPositionContext } from '../../hooks/context/GlobalPosition';
 
-const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
+const Bot: React.FC<{ id: string }> = ({ id }) => {
   const { positions, setBotPosition, status } = useContext(
     GlobalPositionContext
   );
@@ -52,7 +49,7 @@ const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
         //     setTimeout(() => setAction(undefined), 340);
         //   }
       }
-      setTimeout(() => moveBot(), 500);
+      setTimeout(() => moveBot(), 5000);
     }
     moveBot();
   }, []);

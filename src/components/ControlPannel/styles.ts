@@ -7,6 +7,8 @@ interface LifeBarProps {
 export const ControlPannelGrid = styled.div`
   height: 100%;
   padding: 20px 35px;
+  display: grid;
+  grid-template-rows: auto 150px;
 `;
 
 export const LifeBar = styled.div<LifeBarProps>`

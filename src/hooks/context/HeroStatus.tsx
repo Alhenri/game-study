@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useCallback,
 } from 'react';
-import { GlobalPositionContext, PositionsKeys } from './GlobalPosition';
+import { GlobalPositionContext } from './GlobalPosition';
 
 export type HeroPostionType = {
   x: number;
@@ -44,6 +44,15 @@ const HeroStatusContextProvider: React.FC = ({ children }) => {
     position: { x: 2, y: 2 },
     life: 100,
   });
+
+  useEffect(() => {
+    if (status.life <= 0) {
+      setTimeout(() => {
+        window.alert('Você morreu! O jogo reiniciará :/');
+        window.location.reload();
+      }, 2000);
+    }
+  }, [status.life]);
 
   useEffect(() => {
     if (status.action === 'attack') {

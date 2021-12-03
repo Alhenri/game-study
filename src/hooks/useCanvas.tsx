@@ -27,7 +27,7 @@ const InitialCanvasMap: number[][] = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], // 0
 ];
 
-export type ObjectsTypes = 'wall' | 'demon' | null;
+export type ObjectsTypes = 'wall' | 'demon' | 'clear' | null;
 
 export type PayloadCanvasType = {
   canvas: number[][];
@@ -57,6 +57,10 @@ const useCanvas: useCanvasType = () => {
           }
           setPrevPosition((p) => ({ ...p, [objectId]: position }));
           canvas[19 - position.y][position.x + 1] = 2; // coloco o demon lá
+          break;
+        case 'clear':
+          setPrevPosition((p) => ({ ...p, [objectId]: null }));
+          canvas[19 - position.y][position.x + 1] = 0;
           break;
         default:
           break;
