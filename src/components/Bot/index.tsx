@@ -8,11 +8,10 @@ import {
 } from '../../hooks/context/GlobalPosition';
 
 const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
-  const { positions, setPosition } = useContext(GlobalPositionContext);
-  // const [position, setPosition] = useState<HeroPostionType>({
-  //   x: randomNumber(0, 20),
-  //   y: randomNumber(0, 18),
-  // });
+  const { positions, setBotPosition, status } = useContext(
+    GlobalPositionContext
+  );
+
   const [direction, setDirection] = useState<'f' | 'b'>('f');
   const [action, setAction] = useState<HeroActionsType>(undefined);
 
@@ -20,27 +19,27 @@ const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
     function moveBot() {
       switch (randomNumber(0, 5)) {
         case 0:
-          setPosition(id, {
+          setBotPosition(id, {
             x: 0,
             y: 1,
           });
           break;
         case 1:
-          setPosition(id, {
+          setBotPosition(id, {
             x: 0,
             y: -1,
           });
           break;
         case 2:
           setDirection('b');
-          setPosition(id, {
+          setBotPosition(id, {
             x: -1,
             y: 0,
           });
           break;
         case 3:
           setDirection('f');
-          setPosition(id, {
+          setBotPosition(id, {
             x: 1,
             y: 0,
           });
@@ -58,12 +57,17 @@ const Bot: React.FC<{ id: PositionsKeys }> = ({ id }) => {
     moveBot();
   }, []);
 
+  if (status[id]?.status === 'die') {
+    return null;
+  }
+
   return (
     <HumanObject
+      id={id}
       diretion={direction}
       action={action}
-      x={positions[id].x}
-      y={positions[id].y}
+      x={positions[id]?.x}
+      y={positions[id]?.y}
     />
   );
 };

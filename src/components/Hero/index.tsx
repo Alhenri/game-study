@@ -1,10 +1,33 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { HeroStatusContext } from '../../hooks/context/HeroStatus';
-import { HeroObject } from './styles';
+import { GlobalPositionContext } from '../../hooks/context/GlobalPosition';
+import { HeroObject, HeroWepon } from './styles';
+interface Iposition {
+  x: number;
+  y: number;
+}
 
 const Hero: React.FC = () => {
   const { status, setStatus } = useContext(HeroStatusContext);
+  const {
+    canvas: { getCanvasObject },
+  } = useContext(GlobalPositionContext);
   const [pressCount, setPressCount] = useState<number>(0);
+
+  const onHeroTryMove = useCallback(
+    (prevPosition: Iposition, newPosition: Iposition): Iposition => {
+      switch (getCanvasObject(newPosition)) {
+        case 'demon':
+          setStatus((s) => ({ ...s, life: s.life - 20 }));
+          return newPosition;
+        case 'wall':
+          return prevPosition;
+        default:
+          return newPosition;
+      }
+    },
+    [getCanvasObject, setStatus]
+  );
 
   useEffect(() => {
     window.addEventListener(
@@ -15,39 +38,39 @@ const Hero: React.FC = () => {
           case 'ArrowUp':
             setStatus((s) => ({
               ...s,
-              position: {
+              position: onHeroTryMove(s.position, {
                 ...s.position,
-                y: s.position.y === 17 ? 17 : s.position.y + 1,
-              },
+                y: s.position.y + 1,
+              }),
             }));
             break;
           case 'ArrowDown':
             setStatus((s) => ({
               ...s,
-              position: {
+              position: onHeroTryMove(s.position, {
                 ...s.position,
-                y: s.position.y === 1 ? 11 : s.position.y - 1,
-              },
+                y: s.position.y - 1,
+              }),
             }));
             break;
           case 'ArrowLeft':
             setStatus((s) => ({ ...s, direction: 'b' }));
             setStatus((s) => ({
               ...s,
-              position: {
+              position: onHeroTryMove(s.position, {
                 ...s.position,
-                x: s.position.x === 0 ? 0 : s.position.x - 1,
-              },
+                x: s.position.x - 1,
+              }),
             }));
             break;
           case 'ArrowRight':
             setStatus((s) => ({ ...s, direction: 'f' }));
             setStatus((s) => ({
               ...s,
-              position: {
+              position: onHeroTryMove(s.position, {
                 ...s.position,
-                x: s.position.x === 19 ? 19 : s.position.x + 1,
-              },
+                x: s.position.x + 1,
+              }),
             }));
             break;
           case 'q':
@@ -65,13 +88,26 @@ const Hero: React.FC = () => {
     );
   }, [pressCount]);
 
+  if (status.life <= 0) return null;
+
   return (
-    <HeroObject
-      x={status.position.x}
-      y={status.position.y}
-      diretion={status.direction}
-      action={status.action}
-    />
+    <>
+      <HeroObject
+        x={status.position.x}
+        y={status.position.y}
+        yOffset={24}
+        diretion={status.direction}
+        action={status.action}
+      />
+      {/* <HeroWepon
+        x={status.position.x}
+        y={status.position.y}
+        yOffset={32}
+        xOffset={40}
+        diretion={status.direction}
+        action={status.action}
+      /> */}
+    </>
   );
 };
 
