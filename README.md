@@ -1,46 +1,20 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1>Game Study</h1>
 
-## Available Scripts
+<p>O propósito desse repositório é aprimorar meus conhecimentos sobre ReactJs e Typescript. Um jogo envolve muito mais coisas do que uma aplicação comum pra uma funcionalidade específica, como por exemplo, aprofundamento em estilização  (pela necessidade de animar os frames com o CSS, posicionar os elementos e construir toda a interação entre eles), além de muito código e atenção com casos de uso.</p>
 
-In the project directory, you can run:
+<h2>Tecnologias utilizadas</h2>
 
-### `yarn start`
+1. ReactJs: O React foi a grande biblioteca utilizada para a rendeziração dos componentes, criação dos contextos que o jogo envolve (configuração, posicionamento dos bots, sistema de vida e etc.) e o uso dos hooks para aumentar a performance (useCallback, useMemo) e criar os efeitos colaterais (useEffect).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Typescript: Linguagem que auxilia MUITO durante a programação pois ajuda o programador a encontrar inconsistência em variáveis, funções e etc.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3. styled-components: Minha lib de estilização favorita que me ajuda bastante na hora de criar a animação dos frames por que consigo utilizar o Typescript dentro do CSS.
 
-### `yarn test`
+<h2>Sobre o jogo</h2>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<p>O jogo está em desenvolvimento, o objetivo é derrotar todas as criaturas sem morrer. Com o tempo será lançada novas feature, animações, correções de possiveis bugs, enredo, persnagens, inimigos e talvez até um multiplayer.</p>
 
-### `yarn build`
+<p>O jogo está hospedado na vercel, porém só está disponivel para monitores com a resolução maior ou igual a 1920x1080 e você pode acessa-lo no link abaixo.</p> 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+[Abrir o jogo](https://game-study.vercel.app/)
