@@ -16,14 +16,14 @@ const Hero: React.FC = () => {
         diretion={status.direction}
         action={status.action}
       />
-      {/* <HeroWepon
+      <HeroWepon
         x={status.position.x}
         y={status.position.y}
-        yOffset={32}
+        yOffset={28}
         xOffset={40}
         diretion={status.direction}
         action={status.action}
-      /> */}
+      />
     </>
   );
 };

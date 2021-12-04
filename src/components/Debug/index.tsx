@@ -11,6 +11,9 @@ const DebugGrid: React.FC = () => {
   const {
     config: { debugging },
   } = useContext(GameConfigContext);
+
+  if (!debugging) return null;
+
   return (
     <>
       {canvas.map((row, rowIndex) => {
@@ -25,7 +28,6 @@ const DebugGrid: React.FC = () => {
                 fontSize: 15,
                 textAlign: 'revert',
                 display: 'flex',
-                visibility: debugging ? 'visible' : 'hidden',
                 alignItems: 'end',
                 justifyContent: 'center',
               }}

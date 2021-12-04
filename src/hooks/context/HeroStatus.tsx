@@ -162,7 +162,7 @@ const HeroStatusContextProvider: React.FC = ({ children }) => {
               setStatus((s) => ({ ...s, action: 'attack' }));
               setTimeout(
                 () => setStatus((s) => ({ ...s, action: undefined })),
-                340
+                300
               );
             }
         }

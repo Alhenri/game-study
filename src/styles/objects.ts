@@ -8,8 +8,10 @@ interface IGameObject {
   step?: number;
 }
 
-export const GameObject = styled.div<IGameObject>`
-  bottom: ${({ y, yOffset = 0, step = 48 }) => `${y * step + yOffset}px`};
-  left: ${({ x, xOffset = 0, step = 48 }) => `${x * step + xOffset}px`};
+export const GameObject = styled.div.attrs<IGameObject>(
+  ({ x, y, step = 48, yOffset = 0, xOffset = 0 }) => ({
+    style: { bottom: y * step + yOffset, left: x * step + xOffset },
+  })
+)<IGameObject>`
   position: absolute;
 `;

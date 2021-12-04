@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { HumanObject } from './styles';
-import { HeroActionsType } from './types';
 import { randomNumber } from '../../utils/randomNumber';
 import {
   GlobalPositionContext,
@@ -117,6 +116,7 @@ const Bot: React.FC<{ id: string }> = ({ id }) => {
     <HumanObject
       id={id}
       diretion={direction}
+      yOffset={20}
       x={positions[id]?.x}
       y={positions[id]?.y}
     />

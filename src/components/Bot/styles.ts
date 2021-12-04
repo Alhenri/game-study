@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components';
-
-import { heroPersonAttack, heroPerson, botEnemy } from '../../assets';
+import { GameObject } from '../../styles/objects';
+import { botEnemy } from '../../assets';
 
 const heroAnimation = (bgWidth: number) => keyframes`
   from {
@@ -18,25 +18,14 @@ interface HeroObjectInterface {
   action?: 'attack';
 }
 
-export const HumanObject = styled.div<HeroObjectInterface>`
+export const HumanObject = styled(GameObject)<HeroObjectInterface>`
   height: 100px;
-  bottom: ${(p) => `${p.y * 48 + 24}px`};
-  left: ${(p) => `${p.x * 48}px`};
   background-repeat: no-repeat;
-  position: absolute;
   transform: ${(p) =>
     p.diretion === 'f' ? 'rotateY(0deg)' : 'rotateY(180deg)'};
   z-index: 1;
-  ${({ action, x }) => {
+  ${({ action }) => {
     switch (action) {
-      // case 'attack':
-        // return css`
-        //   background-image: url(${botEnemy});
-        //   width: 96px;
-        //   left: ${`${x * 48 - 24}px`};
-        //   animation: ${heroAnimation(384)} 0.3s steps(4) infinite;
-        // `;
-        
       default:
         return css`
           background-image: url(${botEnemy});
