@@ -14,7 +14,7 @@ export const GameConfigContext = createContext({} as GameConfigType);
 
 const GameConfigProvider: React.FC = ({ children }) => {
   const [config, setConfig] = useState<ConfigType>({
-    volume: 3,
+    volume: 1,
     debugging: false,
     difficulty: 2,
   });

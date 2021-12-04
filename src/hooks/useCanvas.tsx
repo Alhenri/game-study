@@ -59,8 +59,11 @@ const useCanvas: useCanvasType = () => {
           canvas[19 - position.y][position.x + 1] = 2; // coloco o demon lá
           break;
         case 'clear':
-          setPrevPosition((p) => ({ ...p, [objectId]: null }));
-          canvas[19 - position.y][position.x + 1] = 0;
+          if (prevPosition[objectId]) {
+            const { y: prev_y, x: prev_x } = prevPosition[objectId];
+            canvas[19 - prev_y][prev_x + 1] = 0;
+            setPrevPosition((p) => ({ ...p, [objectId]: null }));
+          }
           break;
         default:
           break;

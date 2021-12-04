@@ -1,60 +1,115 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useCallback } from 'react';
 import { HumanObject } from './styles';
 import { HeroActionsType } from './types';
 import { randomNumber } from '../../utils/randomNumber';
-import { GlobalPositionContext } from '../../hooks/context/GlobalPosition';
+import {
+  GlobalPositionContext,
+  PositionTypes,
+} from '../../hooks/context/GlobalPosition';
+
+interface IPosition {
+  x: number;
+  y: number;
+}
 
 const Bot: React.FC<{ id: string }> = ({ id }) => {
-  const { positions, setBotPosition, status } = useContext(
-    GlobalPositionContext
-  );
-
+  const {
+    positions,
+    setBotPositions,
+    status,
+    canvas: { getCanvasObject },
+  } = useContext(GlobalPositionContext);
+  const [timeOutId, setTimeOutId] = useState<number>();
   const [direction, setDirection] = useState<'f' | 'b'>('f');
-  const [action, setAction] = useState<HeroActionsType>(undefined);
+
+  const onBotTryMove = useCallback(
+    (
+      prevPosition: IPosition,
+      newPosition: IPosition,
+      p: PositionTypes
+    ): PositionTypes => {
+      switch (getCanvasObject(newPosition)) {
+        case 'demon':
+          return {
+            ...p,
+            [id]: prevPosition,
+          };
+        case 'wall':
+          return { ...p, [id]: prevPosition };
+        default:
+          return { ...p, [id]: newPosition };
+      }
+    },
+    [getCanvasObject, id]
+  );
 
   useEffect(() => {
     function moveBot() {
       switch (randomNumber(0, 5)) {
-        case 0:
-          setBotPosition(id, {
-            x: 0,
-            y: 1,
-          });
+        case 0: // up
+          setBotPositions((p) =>
+            p[id]
+              ? {
+                  ...p,
+                  ...onBotTryMove(p[id], { ...p[id], y: p[id].y + 1 }, p),
+                }
+              : {
+                  ...p,
+                  [id]: { x: randomNumber(5, 15), y: randomNumber(5, 15) },
+                }
+          );
           break;
-        case 1:
-          setBotPosition(id, {
-            x: 0,
-            y: -1,
-          });
+        case 1: // down
+          setBotPositions((p) =>
+            p[id]
+              ? {
+                  ...p,
+                  ...onBotTryMove(p[id], { ...p[id], y: p[id].y - 1 }, p),
+                }
+              : {
+                  ...p,
+                  [id]: { x: randomNumber(5, 15), y: randomNumber(5, 15) },
+                }
+          );
           break;
-        case 2:
+        case 2: // left
           setDirection('b');
-          setBotPosition(id, {
-            x: -1,
-            y: 0,
-          });
+          setBotPositions((p) =>
+            p[id]
+              ? {
+                  ...p,
+                  ...onBotTryMove(p[id], { ...p[id], x: p[id].x - 1 }, p),
+                }
+              : {
+                  ...p,
+                  [id]: { x: randomNumber(5, 15), y: randomNumber(5, 15) },
+                }
+          );
           break;
-        case 3:
+        case 3: // right
           setDirection('f');
-          setBotPosition(id, {
-            x: 1,
-            y: 0,
-          });
+          setBotPositions((p) =>
+            p[id]
+              ? {
+                  ...p,
+                  ...onBotTryMove(p[id], { ...p[id], x: p[id].x + 1 }, p),
+                }
+              : {
+                  ...p,
+                  [id]: { x: randomNumber(5, 15), y: randomNumber(5, 15) },
+                }
+          );
 
           break;
-        // case 4:
-        //   // Não executar o ataque enquanto estiver atacando
-        //   if (!action) {
-        //     setAction('attack');
-        //     setTimeout(() => setAction(undefined), 340);
-        //   }
       }
-      setTimeout(() => moveBot(), 500);
+
+      setTimeOutId(setTimeout(() => moveBot(), 500) as unknown as number);
     }
     moveBot();
   }, []);
 
   if (status[id]?.status === 'die') {
+    clearTimeout(timeOutId);
     return null;
   }
 
@@ -62,7 +117,6 @@ const Bot: React.FC<{ id: string }> = ({ id }) => {
     <HumanObject
       id={id}
       diretion={direction}
-      action={action}
       x={positions[id]?.x}
       y={positions[id]?.y}
     />
