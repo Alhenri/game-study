@@ -1,6 +1,8 @@
 
 <h1>Game Study</h1>
 
+<img src="https://media.giphy.com/media/fO5cxSLvvrHaPtR0W1/giphy.gif" width="620" height="300"/>
+
 <p>O propósito desse repositório é aprimorar meus conhecimentos sobre ReactJs e Typescript. Um jogo envolve muito mais coisas do que uma aplicação comum pra uma funcionalidade específica, como por exemplo, aprofundamento em estilização  (pela necessidade de animar os frames com o CSS, posicionar os elementos e construir toda a interação entre eles), além de muito código e atenção com casos de uso.</p>
 
 <h2>Tecnologias utilizadas</h2>
