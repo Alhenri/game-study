@@ -22,7 +22,40 @@ export const GlobalPositionContext = createContext<GlobalPositionType>(
 );
 
 const GlobalPositionProvider: React.FC = ({ children }) => {
-  const [positions, setBotPositions] = useState<PositionTypes>({});
+  const [positions, setBotPositions] = useState<PositionTypes>({
+    bot_1: {
+      x: 4,
+      y: 3,
+    },
+    bot_2: {
+      x: 2,
+      y: 3,
+    },
+    bot_3: {
+      x: 15,
+      y: 15,
+    },
+    bot_4: {
+      x: 9,
+      y: 17,
+    },
+    bot_5: {
+      x: 11,
+      y: 2,
+    },
+    bot_6: {
+      x: 16,
+      y: 12,
+    },
+    bot_7: {
+      x: 2,
+      y: 15,
+    },
+    bot_8: {
+      x: 13,
+      y: 7,
+    },
+  });
   const [status, setStatus] = useState<StatusBotType>({});
   const { setCanvasObject, ...restCanvas } = useCanvas();
 

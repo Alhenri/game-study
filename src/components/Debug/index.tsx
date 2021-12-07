@@ -34,6 +34,9 @@ const DebugGrid: React.FC = () => {
               y={rowIndex}
               x={colIndex - 1}
             >
+              <div
+                style={{ fontSize: 6, marginBottom: 5 }}
+              >{`${rowIndex} x ${colIndex}`}</div>
               {canvas[19 - rowIndex][colIndex]}
             </GameObject>
           );

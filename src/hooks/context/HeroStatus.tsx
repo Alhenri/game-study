@@ -46,7 +46,7 @@ const HeroStatusContextProvider: React.FC = ({ children }) => {
   const [status, setStatus] = useState<HeroStatusType>({
     action: undefined,
     direction: 'f',
-    position: { x: 2, y: 2 },
+    position: { x: 17, y: 2 },
     life: 100,
   });
 
